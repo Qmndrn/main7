@@ -36,16 +36,16 @@ def zodiac_prediction(update, context):
         update.message.reply_text(f"Вот все знаки зодиака: {signs}")
     else:
         signs = ', '.join(zodiac_predictions.keys())
-        update.message.reply_text(f"Знак не найден. Напиши один из: {signs}")   
+        update.message.reply_text(f"Знак не найден. Напиши один из: {signs}")
 
 
 def main():
     load_dotenv()
-    TOKEN = os.getenv("TELEGRAM_TOKEN")
-    
-    updater = Updater(token=TOKEN, use_context=True)
+    token = os.getenv("TELEGRAM_TOKEN")
+
+    updater = Updater(token=token, use_context=True)
     dispatcher = updater.dispatcher
-    
+
     dispatcher.add_handler(CommandHandler('start', start))
     dispatcher.add_handler(CommandHandler('help', help))
     dispatcher.add_handler(MessageHandler(Filters.text & (~Filters.command), zodiac_prediction))
